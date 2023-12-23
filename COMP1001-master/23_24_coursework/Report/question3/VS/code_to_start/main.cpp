@@ -26,9 +26,9 @@ void openfile(const char* filename, FILE** finput);
 int getint(FILE* fp);
 
 //CRITICAL POINT: images' paths - You need to change these paths
-#define IN "C:\\Users\\vboxuser\\source\\repos\\image_processing\\image_processing\\input_images\\a1.pgm"
-#define OUT "C:\\Users\\vboxuser\\source\\repos\\image_processing\\image_processing\\output_images\\blurred.pgm"
-#define OUT2 "C:\\Users\\vboxuser\\source\\repos\\image_processing\\image_processing\\output_images\\edge_detection.pgm"
+#define IN "C:\Users\jjc19\OneDrive\Documents\GitHub\COMP1001-report\COMP1001-master\23_24_coursework\Report\question3\VS\code_to_start"
+#define OUT "C:\Users\jjc19\OneDrive\Documents\GitHub\COMP1001-report\COMP1001-master\23_24_coursework\Report\question3\VS\code_to_start\output_images\\blurred.pgm"
+#define OUT2 "C:\Users\jjc19\OneDrive\Documents\GitHub\COMP1001-report\COMP1001-master\23_24_coursework\Report\question3\VS\code_to_start\output_images\\edge_detection.pgm"
 
 //IMAGE DIMENSIONS
 #define M 512  //cols
@@ -36,9 +36,9 @@ int getint(FILE* fp);
 
 
 //CRITICAL POINT:these arrays are defined statically. Consider creating these arrays dynamically instead.
-unsigned char frame1[N * M];//input image
-unsigned char filt[N * M];//output filtered image
-unsigned char gradient[N * M];//output image
+unsigned char *frame1 = new char();//input image
+unsigned char *filt = new char();//output filtered image
+unsigned char *gradient = new char();//output image
 
 
 const signed char Mask[5][5] = {//2d gaussian mask with integers
