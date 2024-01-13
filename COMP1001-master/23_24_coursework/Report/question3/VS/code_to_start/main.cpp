@@ -24,6 +24,7 @@ void read_image_and_put_zeros_around(char* filename);
 void write_image2(const char* filename, unsigned char* output_image);
 void openfile(const char* filename, FILE** finput);
 int getint(FILE* fp);
+unsigned char dynamicArray();
 
 //CRITICAL POINT: images' paths - You need to change these paths
 #define IN "C:\Users\jjc19\OneDrive\Documents\GitHub\COMP1001-report\COMP1001-master\23_24_coursework\Report\question3\VS\code_to_start"
@@ -36,9 +37,9 @@ int getint(FILE* fp);
 
 
 //CRITICAL POINT:these arrays are defined statically. Consider creating these arrays dynamically instead.
-unsigned char *frame1 = new char();//input image
-unsigned char *filt = new char();//output filtered image
-unsigned char *gradient = new char();//output image
+unsigned char frame1 = dynamicArray();//input image
+unsigned char filt = dynamicArray();//output filtered image
+unsigned char gradient = dynamicArray();//output image
 
 
 const signed char Mask[5][5] = {//2d gaussian mask with integers
@@ -164,8 +165,8 @@ void read_image(const char* filename)
 		for (j = 0; j < N; j++) {
 			for (i = 0; i < M; i++) {
 
-				//if (fscanf_s(finput, "%d", &temp,20) == EOF)
-				//	exit(EXIT_FAILURE);
+				if (fscanf_s(finput, "%d", &temp,20) == EOF)
+					exit(EXIT_FAILURE);
 				temp = getc(finput);
 
 				frame1[M * j + i] = (unsigned char)temp;
@@ -246,7 +247,12 @@ void openfile(const char* filename, FILE** finput)
 
 
 	//CRITICAL POINT: AT THIS POINT YOU CAN ASSIGN x0,y0 to M,N 
-	// printf("\n Image dimensions are M=%d,N=%d",M,N);
+	//undefine M and N so they can be assigned new values    
+	#undef M
+    #undef N
+    #define M x0
+    #define N y0
+	printf("\n Image dimensions are M=%d,N=%d",M,N);
 
 
 	x = getint(*finput); /* read and throw away the range info */
@@ -257,6 +263,23 @@ void openfile(const char* filename, FILE** finput)
 
 
 //CRITICAL POINT: you can define your routines here that create the arrays dynamically; now, the arrays are defined statically.
+
+//dynamically create arrays using malloc function..
+unsigned char dynamicArray() {
+
+	unsigned char* dynamicArray;
+
+	dynamicArray = (unsigned char*)malloc(N * M * sizeof(unsigned char));
+
+	if (dynamicArray == NULL) {
+		
+		cout << "Allocation failed" << endl;
+		return EXIT_FAILURE;
+	}
+	else {
+		return dynamicArray;
+	}..
+}
 
 
 
